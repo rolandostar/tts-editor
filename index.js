@@ -267,6 +267,7 @@ class TTSApiBackend extends emittery_1.default.Typed {
     loadNewGame(scriptStates) {
         const message = {
             messageID: 1,
+            savePath: 'C:\\Users\\FakeUser\\Documents\\My Games\\Tabletop Simulator\\Saves\\TS_Save_1.json',
             scriptStates,
         };
         return this.send(message);
@@ -297,6 +298,7 @@ class TTSApiBackend extends emittery_1.default.Typed {
     returnMessage(returnValue) {
         const message = {
             messageID: 5,
+            returnID: 0,
             returnValue,
         };
         return this.send(message);
@@ -304,6 +306,7 @@ class TTSApiBackend extends emittery_1.default.Typed {
     gameSaved() {
         const message = {
             messageID: 6,
+            savePath: 'C:\\Users\\FakeUser\\Documents\\My Games\\Tabletop Simulator\\Saves\\TS_Save_1.json',
         };
         return this.send(message);
     }

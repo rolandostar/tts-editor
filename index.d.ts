@@ -94,6 +94,7 @@ export interface PushingNewObject extends JsonMessage<0> {
  */
 export interface LoadingANewGame extends JsonMessage<1> {
     scriptStates: IncomingJsonObject[];
+    savePath: string;
 }
 /**
  * The result of all `print(...)` messages.
@@ -137,13 +138,16 @@ export interface CustomMessage extends JsonMessage<4> {
  */
 export interface ReturnMessage extends JsonMessage<5> {
     returnValue: unknown;
+    returnID: number;
 }
 /**
  * Occurs whenever the game was saved.
  *
  * @see https://api.tabletopsimulator.com/externaleditorapi/#return-messages.
  */
-export declare type GameSaved = JsonMessage<6>;
+export interface GameSaved extends JsonMessage<6> {
+    savePath: string;
+}
 /**
  * Occurs whenever an object is created.
  *
