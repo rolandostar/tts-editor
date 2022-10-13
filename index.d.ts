@@ -76,6 +76,7 @@ export interface SendCustomMessage extends JsonMessage<2> {
  * @see https://api.tabletopsimulator.com/externaleditorapi/#execute-lua-code.
  */
 export interface ExecuteLuaCode extends JsonMessage<3> {
+    returnID: number;
     guid: string;
     script: string;
 }
@@ -219,8 +220,8 @@ export default class ExternalEditorApi extends Emittery.Typed<{
      *
      * @see https://api.tabletopsimulator.com/externaleditorapi/#execute-lua-code
      */
-    executeLuaCode(script: string, guid?: string): Promise<void>;
-    executeLuaCodeAndReturn<T>(script: string, guid?: string): Promise<T>;
+    executeLuaCode(script: string, guid?: string, returnID?: number): Promise<void>;
+    executeLuaCodeAndReturn<T>(script: string, guid?: string, returnID?: number): Promise<T>;
 }
 export declare type SentEventNames = 'getLuaScripts' | 'saveAndPlay' | 'customMessage' | 'executeLuaCode';
 export declare type SentEventTypes = GetLuaScripts | SaveAndPlay | SendCustomMessage | ExecuteLuaCode;

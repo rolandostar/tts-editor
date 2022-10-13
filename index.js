@@ -158,19 +158,20 @@ class ExternalEditorApi extends emittery_1.default.Typed {
      *
      * @see https://api.tabletopsimulator.com/externaleditorapi/#execute-lua-code
      */
-    executeLuaCode(script, guid = '-1') {
+    executeLuaCode(script, guid = '-1', returnID = 0) {
         return __awaiter(this, void 0, void 0, function* () {
             const message = {
                 messageID: 3,
+                returnID,
                 script,
                 guid,
             };
             return this.send(message);
         });
     }
-    executeLuaCodeAndReturn(script, guid = '-1') {
+    executeLuaCodeAndReturn(script, guid = '-1', returnID = 0) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.executeLuaCode(script, guid);
+            yield this.executeLuaCode(script, guid, returnID);
             return this.once('returnMessage').then((v) => v.returnValue);
         });
     }
