@@ -219,9 +219,9 @@ export default class ExternalEditorApi extends Emittery.Typed<
   },
   ReceivedEventNames
 > {
-  private readonly clientPort: number;
-  private readonly serverPort: number;
-  private server = new Server();
+  protected readonly clientPort: number;
+  protected readonly serverPort: number;
+  protected server = new Server();
 
   constructor(options: Options = {}) {
     super();
@@ -265,7 +265,7 @@ export default class ExternalEditorApi extends Emittery.Typed<
     this.server.close();
   }
 
-  private onDataReceived(data: string): void {
+  protected onDataReceived(data: string): void {
     const message = JSON.parse(data) as ReceivedEventTypes;
     switch (message.messageID) {
       case 0:
@@ -295,7 +295,7 @@ export default class ExternalEditorApi extends Emittery.Typed<
     }
   }
 
-  private send<T extends number>(message: JsonMessage<T>): Promise<void> {
+  protected send<T extends number>(message: JsonMessage<T>): Promise<void> {
     const client = new Socket();
     return new Promise((resolve, reject) => {
       client.once('error', reject);
