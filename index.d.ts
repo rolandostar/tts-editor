@@ -1,4 +1,6 @@
+/// <reference types="node" />
 import Emittery from 'emittery';
+import { Server } from 'net';
 export interface Options {
     clientPort?: number;
     serverPort?: number;
@@ -175,9 +177,9 @@ export default class ExternalEditorApi extends Emittery.Typed<{
     gameSaved: GameSaved;
     objectCreated: ObjectCreated;
 }, ReceivedEventNames> {
-    private readonly clientPort;
-    private readonly serverPort;
-    private server;
+    protected readonly clientPort: number;
+    protected readonly serverPort: number;
+    protected server: Server;
     constructor(options?: Options);
     /**
      * Listens for incoming connections.
@@ -191,8 +193,8 @@ export default class ExternalEditorApi extends Emittery.Typed<{
      * Does *NOT* attempt to cancel pending outgoing connections/messages.
      */
     close(): void;
-    private onDataReceived;
-    private send;
+    protected onDataReceived(data: string): void;
+    protected send<T extends number>(message: JsonMessage<T>): Promise<void>;
     /**
      * Requests all of the game state for the currently loaded game.
      *
